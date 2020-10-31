@@ -52,11 +52,8 @@
       package = pkgs.i3-gaps;
     };
   };
-  
-  services.xserver.displayManager.defaultSession = "none+i3"; 
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.xserver.displayManager.defaultSession = "none+i3";
 
   # Enable sound.
   sound.enable = true;
@@ -80,7 +77,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget 
+    wget
     vim
     git
     openssh
@@ -90,24 +87,17 @@
   # Batery manager (used by i3status-rs)
   services.upower.enable = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  # System auto upgrade
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+  };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # System auto garbage collect
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
