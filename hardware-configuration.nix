@@ -4,26 +4,28 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "ohci_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/462edf35-6f38-4207-a781-e52ce155eb10";
+    { device = "/dev/disk/by-uuid/73d36bb0-db88-4d1c-a610-69ead7422b6c";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3F00-1CB4";
+    { device = "/dev/disk/by-uuid/634B-5F01";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/0aa452a1-3250-46d5-a264-7e7a95564d36"; }
+    [ { device = "/dev/disk/by-uuid/e7dfeeec-491d-4384-90e2-9d63d608ed8b"; }
     ];
 
-  virtualisation.virtualbox.guest.enable = true;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
