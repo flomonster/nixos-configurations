@@ -47,13 +47,17 @@
     libinput.enable = true; # Enable touchpad
     libinput.disableWhileTyping = true;
     desktopManager.xterm.enable = false;
+    desktopManager.plasma5.enable = true;
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
     };
   };
 
-  services.xserver.displayManager.defaultSession = "none+i3";
+  services.xserver.displayManager = {
+    defaultSession = "none+i3";
+    sddm.enable = true;
+  };
 
   # Enable sound.
   sound.enable = true;
