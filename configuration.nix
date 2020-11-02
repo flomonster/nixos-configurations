@@ -59,6 +59,9 @@
     sddm.enable = true;
   };
 
+  # Enable Lorri (nix-shell replacement)
+  services.lorri.enable = true;
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio = {
