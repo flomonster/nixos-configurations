@@ -43,7 +43,7 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    xkbOptions = "intl";
+    xkbVariant = "intl";
     libinput.enable = true; # Enable touchpad
     libinput.disableWhileTyping = true;
     desktopManager.xterm.enable = false;
