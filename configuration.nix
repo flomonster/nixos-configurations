@@ -75,7 +75,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.flomonster = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "networkmanager" ]; # Enable ‘sudo’ for the user.
     createHome = true;
     home = "/home/flomonster";
     shell = pkgs.zsh;
@@ -84,11 +84,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
-    vim
+    firefox
     git
     openssh
-    firefox
+    vim
+    wget
   ];
 
   # Batery manager (used by i3status-rs)
