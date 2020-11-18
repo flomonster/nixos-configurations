@@ -14,6 +14,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Mount and clean /tmp at boot
+  boot.cleanTmpDir = true;
+  boot.tmpOnTmpfs = true;
+
   # Networking settings
   networking.hostName = "laptop"; # Define your hostname.
   networking.networkmanager.enable = true;
