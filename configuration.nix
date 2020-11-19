@@ -93,6 +93,7 @@
     openssh
     vim
     wget
+    notify-osd
   ];
 
   # Batery manager (used by i3status-rs)
