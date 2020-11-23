@@ -79,7 +79,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.flomonster = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "networkmanager" ];
     createHome = true;
     home = "/home/flomonster";
     shell = pkgs.zsh;
@@ -95,6 +95,9 @@
     wget
     notify-osd
   ];
+
+  # Add docker
+  virtualisation.docker.enable = true;
 
   # Batery manager (used by i3status-rs)
   services.upower.enable = true;
