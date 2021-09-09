@@ -49,7 +49,7 @@
     layout = "us";
     xkbVariant = "intl";
     libinput.enable = true; # Enable touchpad
-    libinput.disableWhileTyping = true;
+    libinput.touchpad.disableWhileTyping = true;
     desktopManager.xterm.enable = false;
     desktopManager.plasma5.enable = true;
     windowManager.i3 = {
