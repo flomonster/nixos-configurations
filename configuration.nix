@@ -66,33 +66,6 @@
   # Enable Lorri (nix-shell replacement)
   services.lorri.enable = true;
 
-  # Enable postgresql
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_12;
-    extraPlugins = with pkgs.postgresql_12.pkgs; [ postgis ];
-    enableTCPIP = true;
-    authentication = pkgs.lib.mkOverride 10 ''
-        local   all    all                    trust
-        host    all    all    127.0.0.1/32    trust
-        host    all    all    ::1/128         trust
-    '';
-    initialScript = pkgs.writeText "db-initscript" ''
-      CREATE ROLE osrd WITH LOGIN PASSWORD 'nopasswd' CREATEDB;
-      CREATE DATABASE osrd;
-      GRANT ALL PRIVILEGES ON DATABASE osrd TO osrd;
-      CREATE DATABASE chartis;
-      GRANT ALL PRIVILEGES ON DATABASE chartis TO osrd;
-      CREATE DATABASE gaia;
-      GRANT ALL PRIVILEGES ON DATABASE gaia TO osrd;
-    '';
-  };
-
-  # Enable redis
-  services.redis = {
-    enable = true;
-  };
-
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio = {
