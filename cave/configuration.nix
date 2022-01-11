@@ -72,12 +72,13 @@
       enable = true;
       package = pkgs.i3-gaps;
     };
+    displayManager = {
+      defaultSession = "none+i3";
+      sessionCommands = "autorandr -c";
+      sddm.enable = true;
+    };
   };
 
-  services.xserver.displayManager = {
-    defaultSession = "none+i3";
-    sddm.enable = true;
-  };
 
   # Enable Lorri (nix-shell replacement)
   services.lorri.enable = true;
