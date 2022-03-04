@@ -46,7 +46,6 @@
   time.timeZone = "Europe/Paris";
 
   networking.interfaces.enp34s0.useDHCP = true;
-  networking.interfaces.wlp38s0.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
