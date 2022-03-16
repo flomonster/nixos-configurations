@@ -34,6 +34,10 @@
     };
   };
 
+  # Set RTC (hardware clock) to local time like windows.
+  # Avoid wrong time displayed while using windows
+  time.hardwareClockInLocalTime = true;
+
   # Mount and clean /tmp at boot
   boot.cleanTmpDir = true;
   boot.tmpOnTmpfs = true;
