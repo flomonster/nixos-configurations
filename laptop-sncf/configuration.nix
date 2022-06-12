@@ -90,6 +90,7 @@
   environment.systemPackages = with pkgs; [
     firefox
     git
+    home-manager
     openssh
     vim
     wget
