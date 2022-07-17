@@ -103,6 +103,9 @@
   # Batery manager (used by i3status-rs)
   services.upower.enable = true;
 
+  # needed for store VSCode auth token
+  services.gnome.gnome-keyring.enable = true;
+
   # System auto upgrade
   system.autoUpgrade = {
     enable = true;
