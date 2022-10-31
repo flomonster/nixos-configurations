@@ -127,12 +127,6 @@
   # needed for store VSCode auth token
   services.gnome.gnome-keyring.enable = true;
 
-  # System auto upgrade
-  system.autoUpgrade = {
-    enable = true;
-    dates = "weekly";
-  };
-
   # System auto garbage collect
   nix.gc = {
     automatic = true;
