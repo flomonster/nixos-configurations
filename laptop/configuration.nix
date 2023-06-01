@@ -18,8 +18,8 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   # Mount and clean /tmp at boot
-  boot.cleanTmpDir = true;
-  boot.tmpOnTmpfs = true;
+  boot.tmp.cleanOnBoot = true;
+  boot.tmp.useTmpfs = true;
 
   # Networking settings
   networking.hostName = "laptop"; # Define your hostname.
@@ -107,6 +107,9 @@
   # Add libvirt
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
+
+  # Enable zsh
+  programs.zsh.enable = true;
 
   # Batery manager (used by i3status-rs)
   services.upower.enable = true;
