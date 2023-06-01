@@ -14,6 +14,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Support ntfs
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Mount and clean /tmp at boot
   boot.cleanTmpDir = true;
   boot.tmpOnTmpfs = true;
@@ -79,7 +82,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.flomonster = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "networkmanager" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "libvirtd" ];
     createHome = true;
     home = "/home/flomonster";
     shell = pkgs.zsh;
@@ -95,10 +98,15 @@
     vim
     wget
     notify-osd
+    virt-manager
   ];
 
   # Add docker
   virtualisation.docker.enable = true;
+
+  # Add libvirt
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
 
   # Batery manager (used by i3status-rs)
   services.upower.enable = true;
