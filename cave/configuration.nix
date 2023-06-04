@@ -30,7 +30,6 @@
           chainloader /EFI/Microsoft/Boot/bootmgfw.efi
         }
         '';
-      version = 2;
     };
   };
 
@@ -39,8 +38,8 @@
   time.hardwareClockInLocalTime = true;
 
   # Mount and clean /tmp at boot
-  boot.cleanTmpDir = true;
-  boot.tmpOnTmpfs = true;
+  boot.tmp.cleanOnBoot = true;
+  boot.tmp.useTmpfs = true;
 
   # Add kernel modules
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
@@ -102,6 +101,9 @@
     enable = true;
     package = pkgs.pulseaudioFull;
   };
+
+  # Enable zsh
+  programs.zsh.enable = true;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
