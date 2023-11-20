@@ -76,7 +76,8 @@
     enable = true;
     layout = "us";
     xkbVariant = "intl";
-    libinput.enable = true; # Enable touchpad
+    videoDrivers = ["nvidia"];
+    libinput.enable = true; #
     libinput.touchpad.disableWhileTyping = true;
     desktopManager.xterm.enable = false;
     desktopManager.plasma5.enable = true;
@@ -160,6 +161,9 @@
       experimental-features = nix-command flakes
     '';
    };
+
+  # Enable unfree software
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
