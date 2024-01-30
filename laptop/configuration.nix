@@ -10,34 +10,25 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Support ntfs
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.initrd.luks.devices."luks-a1f4d681-097a-49f1-82a6-21810d2e4e76".device = "/dev/disk/by-uuid/a1f4d681-097a-49f1-82a6-21810d2e4e76";
 
-  # Mount and clean /tmp at boot
-  boot.tmp.cleanOnBoot = true;
-  boot.tmp.useTmpfs = true;
 
   # Networking settings
   networking.hostName = "laptop"; # Define your hostname.
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp0s20f3.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Set your time zone.
+  time.timeZone = "Europe/Paris";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -66,19 +57,6 @@
     sddm.enable = true;
   };
 
-  # Enable Lorri (nix-shell replacement)
-  services.lorri.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-  };
-
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.flomonster = {
     isNormalUser = true;
@@ -104,9 +82,15 @@
   # Add docker
   virtualisation.docker.enable = true;
 
-  # Add libvirt
-  virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
+
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
 
   # Enable zsh
   programs.zsh.enable = true;
@@ -142,7 +126,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-
