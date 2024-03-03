@@ -23,6 +23,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."/home/flomonster/shared" =
+    { device = "/dev/disk/by-uuid/5AADCD15045156A2";
+      fsType = "ntfs-3g";
+      options = [ "rw" "uid=1000"];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/55b61408-ada5-4bbb-b381-47cd5640d803"; }
     ];

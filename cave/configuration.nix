@@ -51,6 +51,9 @@
     options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
   '';
 
+  # Add support for NTFS
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Networking settings
   networking.hostName = "cave"; # Define your hostname.
   networking.networkmanager.enable = true;
