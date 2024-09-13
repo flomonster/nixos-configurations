@@ -90,7 +90,7 @@
     };
     displayManager = {
       defaultSession = "none+i3";
-      sessionCommands = "xrandr --output DP-2 --mode 1920x1080 --pos 1050x300 --rotate normal --output HDMI-0 --mode 1680x1050 --pos 0x0 --rotate left --output DP-4 --mode 1920x1080 --pos 2970x300 --rotate normal";
+      sessionCommands = "xrandr --output DP-0 --primary --mode 2560x1440 --pos 1080x188 --output DP-2 --mode 1920x1080 --pos 0x0 --rotate left --output DP-4 --mode 1920x1080 --pos 3640x368";
       sddm.enable = true;
     };
   };
