@@ -83,7 +83,7 @@
     libinput.enable = true; #
     libinput.touchpad.disableWhileTyping = true;
     desktopManager.xterm.enable = false;
-    desktopManager.plasma5.enable = true;
+    desktopManager.plasma6.enable = true;
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -120,6 +120,9 @@
       };
     };
   };
+
+  # It is suggested to use the open source kernel modules on Turing or later GPUs (RTX series, GTX 16xx), and the closed source modules otherwise.
+  hardware.nvidia.open = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.flomonster = {
@@ -158,12 +161,7 @@
     dates = "weekly";
   };
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-   };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable unfree software
   nixpkgs.config.allowUnfree = true;
