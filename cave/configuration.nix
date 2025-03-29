@@ -74,27 +74,21 @@
     keyMap = "us";
   };
 
-  # Enable i3 Desktop Environment.
-  services.xserver = {
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  # enable Sway window manager
+  programs.sway = {
     enable = true;
-    layout = "us";
-    xkbVariant = "intl";
-    videoDrivers = ["nvidia"];
-    libinput.enable = true; #
-    libinput.touchpad.disableWhileTyping = true;
-    desktopManager.xterm.enable = false;
-    desktopManager.plasma6.enable = true;
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-    };
-    displayManager = {
-      defaultSession = "none+i3";
-      sessionCommands = "xrandr --output DP-0 --primary --mode 2560x1440 --pos 1080x188 --output DP-2 --mode 1920x1080 --pos 0x0 --rotate left --output DP-4 --mode 1920x1080 --pos 3640x368";
-      sddm.enable = true;
-    };
+    wrapperFeatures.gtk = true;
+    extraOptions = [ "--unsupported-gpu" ];
   };
 
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager = {
+    defaultSession = "sway";
+    sddm.enable = true;
+  };
 
   # Enable Lorri (nix-shell replacement)
   services.lorri.enable = true;
@@ -124,6 +118,9 @@
   # It is suggested to use the open source kernel modules on Turing or later GPUs (RTX series, GTX 16xx), and the closed source modules otherwise.
   hardware.nvidia.open = true;
 
+  # Enable virtual box
+  virtualisation.virtualbox.host.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.flomonster = {
     isNormalUser = true;
@@ -140,19 +137,17 @@
     firefox
     git
     home-manager
-    notify-osd
     openssh
     vim
     wget
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    mako # notification system developed by swaywm maintainer
   ];
 
   # Add docker
   virtualisation.docker.enable = true;
 
-  # Batery manager (used by i3status-rs)
-  services.upower.enable = true;
-
-  # needed for store VSCode auth token
+  # Enable the gnome-keyring secrets vault.
   services.gnome.gnome-keyring.enable = true;
 
   # System auto garbage collect
