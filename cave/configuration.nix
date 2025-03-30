@@ -74,6 +74,33 @@
     keyMap = "us";
   };
 
+  # enable login manager ReGreet
+  services.greetd = {
+    enable = true;
+    settings.default_session = let 
+      sway-conf = pkgs.writeText "sway-gtkgreet-config" ''
+        exec "${config.programs.regreet.package}/bin/regreet; ${config.programs.sway.package}/bin/swaymsg exit"
+        include /etc/sway/config.d/*
+      '';
+    in
+    {
+      command = "${config.programs.sway.package}/bin/sway --config ${sway-conf}";
+      user = "flomonster";
+    };
+  };
+  environment.etc."greetd/environments".text = "sway";
+  
+  programs.regreet = {
+    enable = true;
+    settings = {
+      background = {
+        path = "/home/flomonster/.config/wallpaper/main.png";
+        fit = "Fill";
+      };
+    };
+  };
+
+
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
@@ -82,12 +109,6 @@
     enable = true;
     wrapperFeatures.gtk = true;
     extraOptions = [ "--unsupported-gpu" ];
-  };
-
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager = {
-    defaultSession = "sway";
-    sddm.enable = true;
   };
 
   # Enable Lorri (nix-shell replacement)
@@ -170,4 +191,3 @@
   system.stateVersion = "20.09"; # Did you read the comment?
 
 }
-
