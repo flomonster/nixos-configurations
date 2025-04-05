@@ -77,29 +77,11 @@
   # enable login manager ReGreet
   services.greetd = {
     enable = true;
-    settings.default_session = let 
-      sway-conf = pkgs.writeText "sway-gtkgreet-config" ''
-        exec "${config.programs.regreet.package}/bin/regreet; ${config.programs.sway.package}/bin/swaymsg exit"
-        include /etc/sway/config.d/*
-      '';
-    in
-    {
-      command = "${config.programs.sway.package}/bin/sway --config ${sway-conf}";
-      user = "flomonster";
+    settings.default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd sway";
+      user = "greeter";
     };
   };
-  environment.etc."greetd/environments".text = "sway";
-  
-  programs.regreet = {
-    enable = true;
-    settings = {
-      background = {
-        path = "/home/flomonster/.config/wallpaper/main.png";
-        fit = "Fill";
-      };
-    };
-  };
-
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -109,6 +91,24 @@
     enable = true;
     wrapperFeatures.gtk = true;
     extraOptions = [ "--unsupported-gpu" ];
+  };
+
+  # Enable screen sharing with sway
+  environment.variables = {
+    XDG_CURRENT_DESKTOP = "sway";
+  };
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true; # adds pkgs.xdg-desktop-portal-wlr to extraPortals
+    wlr.settings.screencast = {
+        output_name = "DP-1";
+        chooser_type = "simple";
+        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+    };
+    config.common.default = "wlr";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk # gtk portal needed to make gtk apps happy
+    ];
   };
 
   # Enable Lorri (nix-shell replacement)
