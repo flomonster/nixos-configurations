@@ -96,6 +96,7 @@
   # Enable screen sharing with sway
   environment.variables = {
     XDG_CURRENT_DESKTOP = "sway";
+    XCURSOR_THEME = "Adwaita";
   };
   xdg.portal = {
     enable = true;
@@ -163,6 +164,7 @@
     wget
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     mako # notification system developed by swaywm maintainer
+    adwaita-icon-theme
   ];
 
   # Add docker
