@@ -96,7 +96,6 @@
   # Enable screen sharing with sway
   environment.variables = {
     XDG_CURRENT_DESKTOP = "sway";
-    XCURSOR_THEME = "Adwaita";
   };
   xdg.portal = {
     enable = true;
