@@ -23,10 +23,22 @@
       fsType = "vfat";
     };
 
-  fileSystems."/home/flomonster/shared" =
+  fileSystems."/home/flomonster/mnt/shared" =
     { device = "/dev/disk/by-uuid/5AADCD15045156A2";
       fsType = "ntfs-3g";
-      options = [ "rw" "uid=1000"];
+      options = [ "nofail" "rw" "uid=1000"];
+    };
+
+  fileSystems."/home/flomonster/mnt/touro" =
+    { device = "/dev/disk/by-uuid/61fed530-9829-4dd2-8b65-107ec163de9b";
+      fsType = "ext4";
+      options = [ "nofail" "rw" ];
+    };
+
+  fileSystems."/home/flomonster/mnt/cherry-box" =
+    { device = "u482805@u482805.your-storagebox.de:/home";
+      fsType = "sshfs";
+      options = [ "nofail" "nodev" "noatime" "allow_other" "IdentityFile=/home/flomonster/.ssh/id_ed25519" "uid=1000" "gid=100" "default_permissions" "ssh_command=ssh -p 23"];
     };
 
   swapDevices =
