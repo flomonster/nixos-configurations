@@ -94,21 +94,17 @@
   };
 
   # Enable screen sharing with sway
-  environment.variables = {
-    XDG_CURRENT_DESKTOP = "sway";
-  };
   xdg.portal = {
     enable = true;
+
+    # Force backend selection
+    config.common.default = "wlr";
+
     wlr.enable = true; # adds pkgs.xdg-desktop-portal-wlr to extraPortals
     wlr.settings.screencast = {
-        output_name = "DP-1";
         chooser_type = "simple";
-        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+        chooser_cmd = "sh -c 'printf \"Monitor: %s\" \"$(slurp -or -f %o)\"'";
     };
-    config.common.default = "wlr";
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk # gtk portal needed to make gtk apps happy
-    ];
   };
 
   # Enable Lorri (nix-shell replacement)
